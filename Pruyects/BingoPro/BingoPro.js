@@ -2,16 +2,16 @@ const min = 1;
 const max = 75;
 const nextNum = [];
 let carton = [];
-let puntosRanking = [
+const puntosRanking = [
   "15 puntos jugador/a Pepe",
   "20 puntos jugador/a Maria",
   "10 puntos jugador/a Juan",
 ];
-let puntosRankingOrdenados = puntosRanking.sort();
+const puntosRankingOrdenados = puntosRanking.sort();
 let puntosPartida = 0;
-let line1 = [];
-let line2 = [];
-let line3 = [];
+const line1 = [];
+const line2 = [];
+const line3 = [];
 let newUser = "";
 
 const infoPuntos = () => {
@@ -24,7 +24,7 @@ const infoPuntos = () => {
 
 const bienvenidaYRegistro = () => {
   newUser = prompt("Cual es su nombre de usuario?");
-  let userList = "Bienvenido " + newUser;
+  const userList = "Bienvenido " + newUser;
   console.log(userList);
 };
 
@@ -36,15 +36,16 @@ function getRandomInt(min, max) {
 
 const ordenNumerosBombo = () => {
   while (nextNum.length < max) {
-    let numeroAleatorio = Math.ceil(Math.random() * max);
+    const numeroAleatorio = Math.ceil(Math.random() * max);
     let existe = false;
     for (let i = 0; i < nextNum.length; i++) {
-      if (nextNum[i] == numeroAleatorio) {
+      if (nextNum[i] === numeroAleatorio) {
         existe = true;
         break;
       }
     }
-    if (existe == false) {
+
+    if (existe === false) {
       nextNum[nextNum.length] = numeroAleatorio;
     }
   }
@@ -54,12 +55,13 @@ const generarCarton = () => {
   const cantidadNumerosCarton = 15;
   let chequeoCarton = "";
   do {
-    let numeroRandom = getRandomInt(min, max);
-    while (carton.includes(numeroRandom) == !true) {
+    const numeroRandom = getRandomInt(min, max);
+    while (carton.includes(numeroRandom) === !true) {
       carton.push(parseInt(numeroRandom));
       carton.sort();
     }
   } while (carton.length < cantidadNumerosCarton);
+
   console.log("Los numeros de su carton son: " + carton);
   console.log(
     "La primera linea sera:" +
@@ -99,11 +101,10 @@ const generarCarton = () => {
   );
   chequeoCarton = prompt("Si desea quedarse con su carton escriba: Yes");
   if (
-    chequeoCarton == "Yes" ||
-    chequeoCarton == "yes" ||
-    chequeoCarton == "YES"
+    chequeoCarton === "Yes" ||
+    chequeoCarton === "yes" ||
+    chequeoCarton === "YES"
   ) {
-  } else {
     carton = [];
     generarCarton();
   }
@@ -115,7 +116,7 @@ const partida = () => {
   const linea2 = [carton[5], carton[6], carton[7], carton[8], carton[9]];
   const linea3 = [carton[10], carton[11], carton[12], carton[13], carton[14]];
   const cartonTotal = [linea1, linea2, linea3];
-  let rankingFinal = [];
+  const rankingFinal = [];
   for (let x = 0; x <= nextNum.length - 1; x++) {
     if (window.confirm("Desea continuar?") == true) {
       contadorTurnos.push("+1");
@@ -126,6 +127,7 @@ const partida = () => {
         if (linea1[y] == nextNum[x]) {
           linea1[y] = "X";
         }
+
         if (
           linea1[0] == "X" &&
           linea1[1] == "X" &&
@@ -137,13 +139,16 @@ const partida = () => {
           if (line1.length == 1) {
             console.log("LINEA 1!!");
           }
+
           break;
         }
       }
+
       for (let y = 0; y <= linea2.length; y++) {
         if (linea2[y] == nextNum[x]) {
           linea2[y] = "X";
         }
+
         if (
           linea2[0] == "X" &&
           linea2[1] == "X" &&
@@ -155,13 +160,16 @@ const partida = () => {
           if (line2.length == 1) {
             console.log("LINEA 2!!");
           }
+
           break;
         }
       }
+
       for (let y = 0; y <= linea3.length; y++) {
         if (linea3[y] == nextNum[x]) {
           linea3[y] = "X";
         }
+
         if (
           linea3[0] == "X" &&
           linea3[1] == "X" &&
@@ -173,9 +181,11 @@ const partida = () => {
           if (line3.length == 1) {
             console.log("LINEA 3!!");
           }
+
           break;
         }
       }
+
       for (let y = 0; y <= linea1.length; y++) {
         if (
           linea1[0] == "X" &&
@@ -224,4 +234,5 @@ const bingo = () => {
   generarCarton();
   partida();
 };
+
 bingo();

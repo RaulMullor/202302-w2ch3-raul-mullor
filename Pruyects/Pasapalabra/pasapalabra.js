@@ -1,6 +1,7 @@
 function temporizador() {
   window.alert("Se acabó el tiempo.");
 }
+
 setTimeout(temporizador, 130000);
 clearTimeout(temporizador);
 
@@ -9,7 +10,7 @@ let partidaNumero = [];
 let newUser = "";
 const aciertos = [];
 const fallos = [];
-const ranking = [6 + " aciertos " + "Pedro", 9 + " aciertos " + "Patricia"];
+const ranking = [6 + " aciertos Pedro", 9 + " aciertos Patricia"];
 let pregunta = "";
 const aciertosYFallos = [];
 
@@ -17,22 +18,26 @@ const inicioP = () => {
   function getRandomInt() {
     return Math.floor(Math.random() * 3);
   }
+
   rosco = getRandomInt();
 };
 
 const bienvenidaYRegistro = () => {
   newUser = prompt("Cual es su nombre de usuario?");
-  let userList = "Bienvenido " + newUser;
+  const userList = "Bienvenido " + newUser;
   console.log(userList);
 };
+
 const queRosco = () => {
-  if (rosco == 0) {
+  if (rosco === 0) {
     partidaNumero = preguntas;
   }
-  if (rosco == 1) {
+
+  if (rosco === 1) {
     partidaNumero = preguntas1;
   }
-  if (rosco == 2) {
+
+  if (rosco === 2) {
     partidaNumero = preguntas2;
   }
 };
@@ -545,17 +550,17 @@ const preguntas2 = [
 
 const vueltaPasapalabra = () => {
   for (let x = 0; x < partidaNumero.length; x++) {
-    if (partidaNumero[x].status == 0) {
+    if (partidaNumero[x].status === 0) {
       pregunta = prompt(partidaNumero[x].question);
       pregunta = pregunta.toLowerCase();
-      if (pregunta == partidaNumero[x].answer) {
+      if (pregunta === partidaNumero[x].answer) {
         console.log("acierto");
         aciertos.push("+1");
         aciertosYFallos.push("+1");
         partidaNumero[x].status = 1;
-      } else if (pregunta == "pasapalabra") {
+      } else if (pregunta === "pasapalabra") {
         partidaNumero[x].status = 3;
-      } else if (pregunta == "end") {
+      } else if (pregunta === "end") {
         console.log("Bye");
         break;
       } else {
@@ -570,17 +575,17 @@ const vueltaPasapalabra = () => {
 
 const vueltaPasapalabra2 = () => {
   for (let x = 0; x < partidaNumero.length; x++) {
-    if (partidaNumero[x].status == 3) {
+    if (partidaNumero[x].status === 3) {
       pregunta = prompt(partidaNumero[x].question);
       pregunta = pregunta.toLowerCase();
-      if (pregunta == partidaNumero[x].answer) {
+      if (pregunta === partidaNumero[x].answer) {
         console.log("correcto!");
         aciertos.push("+1");
         aciertosYFallos.push("+1");
         partidaNumero[x].status = 1;
-      } else if (pregunta == "pasapalabra") {
+      } else if (pregunta === "pasapalabra") {
         partidaNumero[x].status = 3;
-      } else if (pregunta == "end") {
+      } else if (pregunta === "end") {
         console.log("Bye");
         break;
       } else {
@@ -592,6 +597,7 @@ const vueltaPasapalabra2 = () => {
     }
   }
 };
+
 const juegoCompleto = () => {
   inicioP();
   queRosco();
@@ -602,7 +608,8 @@ const juegoCompleto = () => {
       vueltaPasapalabra2();
     } while (aciertosYFallos.length < 27 && pregunta !== "end");
   }
-  if (pregunta == "end") {
+
+  if (pregunta === "end") {
     console.log("Su cantidad de aciertos es de " + aciertos.length);
   } else {
     ranking.push(aciertos.length + " aciertos " + newUser);
@@ -611,4 +618,5 @@ const juegoCompleto = () => {
     console.log("Su cantidad de fallos es de " + fallos.length);
   }
 };
+
 juegoCompleto();
